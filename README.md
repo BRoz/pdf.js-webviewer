@@ -69,6 +69,10 @@ This will generate the file `build/generic/build/pdf.js` that can be included in
 
 ### Building a Resilience Package.
 
+First you will need `resilience-tools` so run:
+
+    $ npm install resilience-tools
+
 To build a plain resilience compatible `.zip` file, run:
 
     $ node make resilience
