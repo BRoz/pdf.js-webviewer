@@ -18,7 +18,11 @@
 
 'use strict';
 
+//#if RESILIENCE
+var DEFAULT_URL = '';
+//#else
 var DEFAULT_URL = 'compressed.tracemonkey-pldi-09.pdf';
+//#endif
 var DEFAULT_SCALE = 'auto';
 var DEFAULT_SCALE_DELTA = 1.1;
 var UNKNOWN_SCALE = 0;

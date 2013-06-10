@@ -1,0 +1,21 @@
+<html>
+<head>
+<script>
+require(['jquery'], function($) {
+  var gadget = $('#pdfjs-gadget-iframe').parent();
+  var path = gadget.attr('data-gadget').replace(/\/[^/]*$/, '');
+  var properties = JSON.parse(gadget.attr('data-gadget-property'));
+  properties.width = properties.width || 700;
+  properties.height = properties.height || 1000;
+  $('#pdfjs-gadget-iframe').css({width:properties.width, height:properties.height});
+  properties.viewerPath = path;
+  require(['.' + path + '/resilience-main'], function(main) {
+    main(properties);
+  });
+});
+</script>
+</head>
+<body>
+<iframe id="pdfjs-gadget-iframe" src="javascript:''"></iframe>
+</body>
+</html>

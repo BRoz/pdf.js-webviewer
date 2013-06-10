@@ -35,6 +35,8 @@ var ROOT_DIR = __dirname + '/', // absolute path to project's root
     LOCALE_SRC_DIR = 'l10n/',
     GH_PAGES_DIR = BUILD_DIR + 'gh-pages/',
     GENERIC_DIR = BUILD_DIR + 'generic/',
+    RESILIENCE_DIR = BUILD_DIR + 'resilience/',
+    RESILIENCE_SRC_DIR = RESILIENCE_DIR + 'src/',
     REPO = 'git@github.com:mozilla/pdf.js.git',
     PYTHON_BIN = 'python2.7',
     MOZCENTRAL_PREF_PREFIX = 'pdfjs',
@@ -112,6 +114,52 @@ target.generic = function() {
     ]
   };
   builder.build(setup);
+};
+
+//
+// make resilience package
+// Builds a RenderJS/JIO compatible version of the generic viewer.
+//
+target.resilience = function() {
+  target.bundle({});
+  target.locale();
+
+  cd(ROOT_DIR);
+  echo();
+  echo('### Creating resilience compatible generic viewer');
+
+  rm('-rf', RESILIENCE_DIR);
+  mkdir('-p', RESILIENCE_SRC_DIR + '/pdfjs');
+
+  var defines = builder.merge(DEFINES, {RESILIENCE: true});
+
+  var setup = {
+    defines: defines,
+    copy: [
+      [COMMON_WEB_FILES, RESILIENCE_SRC_DIR + '/pdfjs'],
+      ['external/webL10n/l10n.js', RESILIENCE_SRC_DIR + '/pdfjs'],
+      ['web/compatibility.js', RESILIENCE_SRC_DIR + '/pdfjs'],
+      ['package.json', RESILIENCE_DIR],
+      ['web/locale', RESILIENCE_SRC_DIR + '/pdfjs'],
+      ['web/resilience/*', RESILIENCE_SRC_DIR],
+    ],
+    preprocess: [
+      [BUILD_TARGET, RESILIENCE_SRC_DIR + '/pdfjs/pdf.js'],
+      [COMMON_WEB_FILES_PREPROCESS, RESILIENCE_SRC_DIR + '/pdfjs']
+    ]
+  };
+  builder.build(setup);
+
+  var res = require('../resilience-tools/index.js');
+  cd(RESILIENCE_DIR);
+  res.commandLine();
+
+  // hack to prevent make.js failing the build because of parameters passed to the job
+  var y;
+  process.argv.forEach(function(x) {
+    if (y) { target[x] = function() {}; y = false; }
+    if (x.indexOf('--') === 0) { target[x] = function() {}; y = true; }
+  });
 };
 
 //

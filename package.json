@@ -4,6 +4,8 @@
   "dependencies": {
     "jshint": "git://github.com/jshint/jshint.git#42ace75a"
   },
+  "__comment":"resilience-tools version 0.3.0 needed to build resilience target",
+
   "scripts": {
     "test": "node make lint"
   },
@@ -16,5 +18,13 @@
       "type": "Apache v2",
       "url": "https://github.com/mozilla/pdf.js/blob/master/LICENSE"
     }
-  ]
+  ],
+
+  "__comment": "This allows a viewer declare the filetypes it can handle so a web framework",
+  "__comment": "can load the proper plugin for handling a given file.",
+  "resilience": {
+    "actions": {
+      "view":["pdf"]
+    }
+  }
 }
