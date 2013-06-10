@@ -150,7 +150,7 @@ target.resilience = function() {
   };
   builder.build(setup);
 
-  var res = require('../resilience-tools/index.js');
+  var res = require('resilience-tools');
   cd(RESILIENCE_DIR);
   res.commandLine();
 
