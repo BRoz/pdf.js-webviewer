@@ -1,23 +1,44 @@
-define(['jquery', 'jio'], function($, JIO) {
-  return function(properties) {
-    var attach = properties.jioAttach;
+define(['jquery', 'module'], function($, Module) {
+  var HELP = "This is gadget for viewing .pdf files.\n" +
+    "Configuration params:" +
+    "    locale (string) will be used as the locale which the user interface is described in.\n" +
+    "\n" +
+    "Params should be a correctly formed JSON dict, eg: {\"locale\":\"en_US\"}\n";
 
-    JIO.getAttachment(attach, function(err, ret) {
-      if (err) { throw new Error(err); }
-      var u = URL.createObjectURL(ret);
-      $('#pdfjs-gadget-iframe').attr('src', properties.viewerPath
-                                            + '/pdfjs/viewer.html?file=' + encodeURIComponent(u));
-    });
+  return function(getData, domLocation, action, params) {
+    $(domLocation).prepend('<textarea cols="1" rows="1"></textarea>');
+    var ta = $($(domLocation).children()[0]);
+    ta.css({width:"100%", height:"100%"});
 
-    var win = $('#pdfjs-gadget-iframe')[0].contentWindow;
-    var doc = $(win.document);
-    var head = $(doc.find('head')[0]);
+    var out = { getData: function(cb) { cb("pdf.js can't save"); } };
 
-    var locale = properties['locale'];
-    if (typeof(locale) === 'string') {
-      doc.write('<link rel="resource" type="application/l10n" href="l10n/' +
-        locale + '/viewer.properties"/>');
+    var locale;
+    if (params) {
+      if (params === 'help') {
+        ta.val(HELP);
+      } else {
+        try {
+          locale = JSON.parse(params).locale;
+        } catch (e) {
+          ta.val(e.stack);
+          return out;
+        }
+      }
     }
 
+    if (!params || typeof(locale) !== 'undefined') {
+      getData('blob', function(err, ret) {
+        if (err) { return ta.val(err.stack); }
+        var path = Module.uri.replace(/\/[^/]*$/, '/pdfjs/viewer.html?file=');
+        $(domLocation).prepend('<iframe src="javascript:\'\'"></iframe>');
+        var ifr = $($(domLocation).children()[0]);
+        ifr.attr("width", $(domLocation).width());
+        ifr.attr("height", $(domLocation).height());
+        ifr.attr('src', path + encodeURIComponent(URL.createObjectURL(ret)));
+        $(ta).remove();
+      });
+    }
+
+    return out;
   };
 });
