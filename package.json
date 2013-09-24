@@ -23,7 +23,8 @@
   "__comment": "This allows a viewer declare the filetypes it can handle so a web framework",
   "__comment": "can load the proper plugin for handling a given file.",
   "resilience": {
-    "main":"resilience-main.js",
+    "modelVersion":"0.1",
+    "main":"pdfjs/viewer.html",
     "actions": {
       "view":["pdf"]
     }

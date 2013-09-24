@@ -19,7 +19,7 @@
 'use strict';
 
 //#if RESILIENCE
-var DEFAULT_URL = '';
+var DEFAULT_URL = '../tiny.pdf';
 //#else
 var DEFAULT_URL = 'compressed.tracemonkey-pldi-09.pdf';
 //#endif
