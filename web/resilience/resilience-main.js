@@ -3,7 +3,9 @@
   "use strict";
 
   rJS(window).declareMethod('setContent', function (url) {
-    PDFView.open(url, 0);
+    $(function() {
+      PDFView.open(url, 0);
+    });
   });
 
 }(window, jQuery, rJS))

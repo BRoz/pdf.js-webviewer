@@ -18,11 +18,7 @@
 
 'use strict';
 
-//#if RESILIENCE
-var DEFAULT_URL = '../tiny.pdf';
-//#else
 var DEFAULT_URL = 'compressed.tracemonkey-pldi-09.pdf';
-//#endif
 var DEFAULT_SCALE = 'auto';
 var DEFAULT_SCALE_DELTA = 1.1;
 var UNKNOWN_SCALE = 0;
@@ -3611,7 +3607,7 @@ document.addEventListener('DOMContentLoaded', function webViewerLoad(evt) {
 //return;
 //#endif
 
-//#if !B2G
+//#if !B2G && !RESILIENCE
   PDFView.open(file, 0);
 //#endif
 }, true);
