@@ -3607,7 +3607,7 @@ document.addEventListener('DOMContentLoaded', function webViewerLoad(evt) {
 //return;
 //#endif
 
-//#if !B2G && !RESILIENCE
+//#if !B2G && !WEBVIEWER
   PDFView.open(file, 0);
 //#endif
 }, true);

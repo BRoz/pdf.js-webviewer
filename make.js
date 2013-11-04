@@ -35,8 +35,8 @@ var ROOT_DIR = __dirname + '/', // absolute path to project's root
     LOCALE_SRC_DIR = 'l10n/',
     GH_PAGES_DIR = BUILD_DIR + 'gh-pages/',
     GENERIC_DIR = BUILD_DIR + 'generic/',
-    RESILIENCE_DIR = BUILD_DIR + 'resilience/',
-    RESILIENCE_SRC_DIR = RESILIENCE_DIR + 'src/',
+    WEBVIEWER_DIR = BUILD_DIR + 'webviewer/',
+    WEBVIEWER_SRC_DIR = WEBVIEWER_DIR + 'src/',
     REPO = 'git@github.com:mozilla/pdf.js.git',
     PYTHON_BIN = 'python2.7',
     MOZCENTRAL_PREF_PREFIX = 'pdfjs',
@@ -117,41 +117,40 @@ target.generic = function() {
 };
 
 //
-// make resilience package
-// Builds a RenderJS/JIO compatible version of the generic viewer.
+// Builds a WebViewer ( see: http://webviewers.org )
 //
-target.resilience = function() {
+target.webviewer = function() {
   target.bundle({});
   target.locale();
 
   cd(ROOT_DIR);
   echo();
-  echo('### Creating resilience compatible generic viewer');
+  echo('### Creating WebViewer');
 
-  rm('-rf', RESILIENCE_DIR);
-  mkdir('-p', RESILIENCE_SRC_DIR + '/pdfjs');
+  rm('-rf', WEBVIEWER_DIR);
+  mkdir('-p', WEBVIEWER_SRC_DIR + '/pdfjs');
 
-  var defines = builder.merge(DEFINES, {RESILIENCE: true});
+  var defines = builder.merge(DEFINES, {WEBVIEWER: true});
 
   var setup = {
     defines: defines,
     copy: [
-      [COMMON_WEB_FILES, RESILIENCE_SRC_DIR + '/pdfjs'],
-      ['external/webL10n/l10n.js', RESILIENCE_SRC_DIR + '/pdfjs'],
-      ['web/compatibility.js', RESILIENCE_SRC_DIR + '/pdfjs'],
-      ['package.json', RESILIENCE_DIR],
-      ['web/locale', RESILIENCE_SRC_DIR + '/pdfjs'],
-      ['web/resilience/*', RESILIENCE_SRC_DIR],
+      [COMMON_WEB_FILES, WEBVIEWER_SRC_DIR + '/pdfjs'],
+      ['external/webL10n/l10n.js', WEBVIEWER_SRC_DIR + '/pdfjs'],
+      ['web/compatibility.js', WEBVIEWER_SRC_DIR + '/pdfjs'],
+      ['package.json', WEBVIEWER_DIR],
+      ['web/locale', WEBVIEWER_SRC_DIR + '/pdfjs'],
+      ['web/webviewer/*', WEBVIEWER_SRC_DIR],
     ],
     preprocess: [
-      [BUILD_TARGET, RESILIENCE_SRC_DIR + '/pdfjs/pdf.js'],
-      [COMMON_WEB_FILES_PREPROCESS, RESILIENCE_SRC_DIR + '/pdfjs']
+      [BUILD_TARGET, WEBVIEWER_SRC_DIR + '/pdfjs/pdf.js'],
+      [COMMON_WEB_FILES_PREPROCESS, WEBVIEWER_SRC_DIR + '/pdfjs']
     ]
   };
   builder.build(setup);
 
   var res = require('resilience-tools');
-  cd(RESILIENCE_DIR);
+  cd(WEBVIEWER_DIR);
   res.commandLine();
 
   // hack to prevent make.js failing the build because of parameters passed to the job

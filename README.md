@@ -67,23 +67,23 @@ In order to bundle all `src/` files into a final `pdf.js` and build the generic 
 
 This will generate the file `build/generic/build/pdf.js` that can be included in your final project. The pdf.js file is large and should be minified for production. Also, if you would like to support more browsers than firefox you'll also need to include `compatibility.js` from `build/generic/web/`.
 
-### Building a Resilience Package.
+### Building a WebViewer.
 
 First you will need `resilience-tools` so run:
 
     $ npm install resilience-tools
 
-To build a plain resilience compatible `.zip` file, run:
+To build a plain WebViewer, run:
 
-    $ node make resilience
+    $ node make webviewer
 
 To generate a maven build sutible for including in the XWiki source tree run:
 
-    $ node make resilience --mvn
+    $ node make webviewer --mvn
 
-To generate a resilience `.zip` and post it directly to an existing XWiki installation run:
+To generate a webviewer `.zip` and post it directly to an existing XWiki installation run:
 
-    $ node make resilience --post Admin:admin@192.168.0.6:8080/xwiki/bin/upload/Resilience/Gadgets
+    $ node make webviewer --post Admin:admin@192.168.0.6:8080/xwiki/bin/upload/Resilience/Gadgets
 
 where `Admin` is your username, `admin` is your password and `192.168.0.6` is the name of the XWiki
 server. Substitute the port number it's running on for 8080.
