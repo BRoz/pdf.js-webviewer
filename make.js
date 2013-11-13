@@ -138,7 +138,7 @@ target.webviewer = function() {
       [COMMON_WEB_FILES, WEBVIEWER_SRC_DIR + '/pdfjs'],
       ['external/webL10n/l10n.js', WEBVIEWER_SRC_DIR + '/pdfjs'],
       ['web/compatibility.js', WEBVIEWER_SRC_DIR + '/pdfjs'],
-      ['package.json', WEBVIEWER_DIR],
+      ['webviewer.json', WEBVIEWER_DIR],
       ['web/locale', WEBVIEWER_SRC_DIR + '/pdfjs'],
       ['web/webviewer/*', WEBVIEWER_SRC_DIR],
     ],
@@ -149,7 +149,7 @@ target.webviewer = function() {
   };
   builder.build(setup);
 
-  var res = require('resilience-tools');
+  var res = require('webviewer-tools');
   cd(WEBVIEWER_DIR);
   res.commandLine();
 

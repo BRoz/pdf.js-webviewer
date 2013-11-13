@@ -69,24 +69,10 @@ This will generate the file `build/generic/build/pdf.js` that can be included in
 
 ### Building a WebViewer.
 
-First you will need `resilience-tools` so run:
-
-    $ npm install resilience-tools
-
-To build a plain WebViewer, run:
-
+    $ npm install webviewer-tools
     $ node make webviewer
 
-To generate a maven build sutible for including in the XWiki source tree run:
-
-    $ node make webviewer --mvn
-
-To generate a webviewer `.zip` and post it directly to an existing XWiki installation run:
-
-    $ node make webviewer --post Admin:admin@192.168.0.6:8080/xwiki/bin/upload/Resilience/Gadgets
-
-where `Admin` is your username, `admin` is your password and `192.168.0.6` is the name of the XWiki
-server. Substitute the port number it's running on for 8080.
+Your webviewer package will be found in `/build/webviewer` directory.
 
 
 # Learning

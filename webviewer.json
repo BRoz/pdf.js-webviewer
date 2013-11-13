@@ -1,14 +1,7 @@
 {
+  "modelVersion":"0.1",
   "name": "pdf.js",
   "version": "0.7.169",
-  "dependencies": {
-    "jshint": "git://github.com/jshint/jshint.git#42ace75a"
-  },
-  "__comment":"webviewer-tools version 0.4.0 needed to build webviewer target",
-
-  "scripts": {
-    "test": "node make lint"
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/mozilla/pdf.js.git"
@@ -19,4 +12,8 @@
       "url": "https://github.com/mozilla/pdf.js/blob/master/LICENSE"
     }
   ],
+  "main":"pdfjs/viewer.html",
+  "actions": {
+    "view":["pdf"]
+  }
 }
