@@ -1,19 +1,18 @@
 {
   "modelVersion":"0.1",
   "name": "pdf.js",
+  "author": "Caleb James DeLisle, XWiki SAS",
+  "description": "PDF Viewer based on Mozilla's PDF.js",
   "version": "0.7.169",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/mozilla/pdf.js.git"
-  },
-  "licenses": [
-    {
-      "type": "Apache v2",
-      "url": "https://github.com/mozilla/pdf.js/blob/master/LICENSE"
-    }
-  ],
-  "main":"pdfjs/viewer.html",
+  "releaseStatus": "beta",
   "actions": {
     "view":["pdf"]
-  }
+  },
+  "sourceURL": "git://github.com/WebViewers/pdf.js-webviewer.git",
+  "license": "http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html",
+  "type": "office",
+  "originalDeveloper": "https://mozilla.org/",
+  "viewerLicense": "https://github.com/WebViewers/pdf.js-webviewer/blob/master/LICENSE",
+  "viewerURL": "http://mozilla.github.io/pdf.js/",
+  "main":"pdfjs/viewer.html"
 }
