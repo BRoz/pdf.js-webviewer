@@ -4,8 +4,6 @@
   "dependencies": {
     "jshint": "git://github.com/jshint/jshint.git#42ace75a"
   },
-  "__comment":"webviewer-tools version 0.4.0 needed to build webviewer target",
-
   "scripts": {
     "test": "node make lint"
   },
@@ -18,5 +16,5 @@
       "type": "Apache v2",
       "url": "https://github.com/mozilla/pdf.js/blob/master/LICENSE"
     }
-  ],
+  ]
 }
